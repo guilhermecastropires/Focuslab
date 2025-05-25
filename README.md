@@ -55,7 +55,13 @@ Siga estas instruções para configurar e rodar o projeto localmente.
 
 ### Instalação
 
-1.  **Crie e ative um ambiente virtual (recomendado):**
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/guilhermecastropires/Focuslab
+    cd Focuslab
+    ```
+
+2.  **Crie e ative um ambiente virtual (recomendado):**
     * No Windows:
         ```bash
         python -m venv venv
