@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard{% if data_exibicao %} - {{ data_exibicao }}{% endif %} - Focus Lab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon/favicon.ico') }}">
+</head>
+<body class="page-dashboard-v6">
+
+    <header class="site-header-v6 simple-header">
+        <div class="header-container-v6">
+            <div class="header-left-v6">
+                <a href="{{ url_for('dashboard_dia_url', data=now.strftime('%d-%m-%Y')) }}" class="site-logo-link-header-v6">
+                    <img src="{{ url_for('static', filename='img/imagens/logoazul.png') }}" alt="Focus Lab Logo" class="header-logo-img-v6">
+                </a>
+            </div>
+            <div class="header-center-v6">
+                <a href="{{ url_for('dashboard_dia_url', data=prev_date_link) }}" class="btn-header-nav-v6" title="Dia Anterior">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                </a>
+                <h1 class="page-title-header-v6">Dashboard{% if data_exibicao %} - {{ data_exibicao }}{% endif %}</h1>
+                <a href="{{ url_for('dashboard_dia_url', data=next_date_link) }}" class="btn-header-nav-v6" title="Próximo Dia">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                </a>
+            </div>
+            <div class="header-right-v6">
+                <nav class="main-navigation-v6">
+                    <a href="{{ url_for('perfil', from_date=data_param_original if data_param_original else now.strftime('%d-%m-%Y')) }}" class="btn-header-action-v6 btn-perfil-v6">Perfil</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-layout-container-v6">
+        <aside class="dashboard-sidebar-v6">
+            <nav class="sidebar-nav-v6">
+                <a href="{{ url_for('agenda', ano=(data_param_original.split('-')[2] | int) if (data_param_original and '-' in data_param_original) else (now.year if now is defined else ''), from_date=data_param_original if data_param_original else now.strftime('%d-%m-%Y')) }}" class="sidebar-link-v6" title="Agenda Anual">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                        <path d="M17 3h-1V1h-2v2H10V1H8v2H7c-1.11 0-1.99.9-1.99 2L5 21c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2Zm0 18H7V8h14v13ZM9 10h2v2H9v-2Zm4 0h2v2h-2v-2Zm-4 4h2v2H9v-2Zm4 0h2v2h-2v-2Z"/>
+                    </svg>
+                    <span>Agenda</span>
+                </a>
+                {# Você pode adicionar mais links na sidebar aqui no futuro, se desejar #}
+            </nav>
+        </aside>
+
+        <main class="dashboard-wrapper-v6">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              <ul class="flashes-v6">
+              {% for category, message in messages %}
+                <li class="flash-{{ category }}">{{ message }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+            {% endwith %}
+    
+            <div class="dashboard-grid-v6">
+                <section class="notes-section-v6 card-style-v6">
+                    <div class="card-header-v6">
+                        <h2>Notas para {{ data_exibicao if data_exibicao is defined else 'Hoje' }}</h2>
+                    </div>
+                    <div class="card-body-v6">
+                        <form method="POST" action="{{ url_for('salvar_nota') }}" class="form-layout-v6">
+                            <input type="hidden" name="data" value="{{ data_param_original.split('-')[2] ~ '-' ~ data_param_original.split('-')[1] ~ '-' ~ data_param_original.split('-')[0] if (data_param_original is defined and data_param_original) else (now.strftime('%Y-%m-%d') if now is defined else '') }}">
+                            <div class="form-group-v6">
+                                <label for="note-content" class="sr-only">Conteúdo da Nota</label>
+                                <textarea name="content" id="note-content" rows="7" placeholder="Suas notas e pensamentos do dia...">{{ nota.content if nota else '' }}</textarea>
+                            </div>
+                            <button type="submit" class="btn-v6 btn-submit-v6 btn-full-width-v6">Salvar Nota</button>
+                        </form>
+                    </div>
+                </section>
+    
+                <section class="tasks-section-v6 card-style-v6">
+                     <div class="card-header-v6">
+                        <h2>Tarefas para {{ data_exibicao if data_exibicao is defined else 'Hoje' }}</h2>
+                    </div>
+                    <div class="card-body-v6">
+                        {% if tarefas %}
+                            <ul class="task-list-v6">
+                            {% for tarefa in tarefas %}
+                                <li class="task-item-v6 {{ 'task-done-v6' if tarefa.done else '' }}">
+                                    <div class="task-main-content-v6">
+                                        <form method="POST" action="{{ url_for('toggle_tarefa', tarefa_id=tarefa.id) }}" class="task-toggle-form-v6">
+                                            <input type="checkbox" name="done" id="task-{{ tarefa.id }}" value="True" {% if tarefa.done %}checked{% endif %} onchange="this.form.submit()" class="task-checkbox-v6">
+                                            <label for="task-{{ tarefa.id }}" class="checkbox-custom-label-v6" aria-label="Marcar tarefa como concluída"></label>
+                                        </form>
+                                        <span class="task-name-v6"
+                                              {% if tarefa.color and tarefa.color|string|trim != "" and not tarefa.done %}
+                                                  style="color: {{ tarefa.color }}; font-weight: 600;"
+                                              {% endif %}>
+                                            {{ tarefa.name }}
+                                        </span>
+                                    </div>
+                                    <form method="POST" action="{{ url_for('deletar_tarefa', tarefa_id=tarefa.id) }}" class="task-delete-form-v6">
+                                        <button type="submit" class="btn-delete-task-v6" onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');" aria-label="Deletar tarefa">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM15 4V6H9V4H15Z"></path></svg>
+                                        </button>
+                                    </form>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        {% else %}
+                            <div class="empty-state-container-v6">
+                                <svg class="empty-state-icon-v6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48"><path d="M20 22H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1Zm-1-2V4H5v16h14ZM8 7h8v2H8V7Zm0 4h8v2H8v-2Zm0 4h5v2H8v-2Z"/></svg>
+                                <p class="empty-state-text-v6">Nenhuma tarefa para este dia. Que tal adicionar uma?</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer-v6 add-task-form-container-v6">
+                        <h3>Adicionar Nova Tarefa</h3>
+                        <form method="POST" action="{{ url_for('adicionar_tarefa') }}" class="form-layout-v6 inline-form-v6">
+                            <input type="hidden" name="data" value="{{ data_param_original.split('-')[2] ~ '-' ~ data_param_original.split('-')[1] ~ '-' ~ data_param_original.split('-')[0] if (data_param_original is defined and data_param_original) else (now.strftime('%Y-%m-%d') if now is defined else '') }}">
+                            <div class="form-group-v6">
+                                <label for="nome_tarefa_input" class="sr-only">Nome da Tarefa</label>
+                                <input type="text" id="nome_tarefa_input" name="nome_tarefa" placeholder="Ex: Reunião de planejamento" required>
+                            </div>
+                            <div class="form-group-v6 task-color-group-v6">
+                                <label for="cor_tarefa_select" class="sr-only">Cor da Tarefa</label>
+                                <select name="cor_tarefa" id="cor_tarefa_select" class="task-color-select-v6">
+                                    <option value="">Sem Cor</option>
+                                    <option value="red" data-color="red">Vermelho</option>
+                                    <option value="green" data-color="green">Verde</option>
+                                    <option value="blue" data-color="blue">Azul</option>
+                                    <option value="orange" data-color="orange">Laranja</option>
+                                    <option value="purple" data-color="purple">Roxo</option>
+                                    <option value="#FFC107" data-color="#FFC107">Amarelo</option>
+                                    <option value="#00BCD4" data-color="#00BCD4">Ciano</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-v6 btn-submit-v6 btn-icon-v6">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2h6Z"/></svg>
+                                <span>Adicionar</span>
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="timer-pomodoro-section-v6 card-style-v6">
+                    <div class="card-header-v6">
+                        <h2>Timer & Pomodoro</h2>
+                    </div>
+                    <div class="card-body-v6 timer-pomodoro-body">
+                        <div class="timer-mode-switcher-v6">
+                            <button type="button" id="btn-mode-timer" class="btn-mode-v6">Timer</button>
+                            <button type="button" id="btn-mode-pomodoro" class="btn-mode-v6 active">Pomodoro</button>
+                        </div>
+                
+                        <div class="timer-display-v6">
+                            <span id="time-display">25:00</span>
+                        </div>
+                        <div id="timer-status-display" class="timer-status-v6">Pomodoro: Foco</div>
+                
+                        <div id="standard-timer-controls" class="timer-buttons-v6" style="display: none;">
+                            <div class="timer-input-group">
+                                <label for="timer-minutes-input">Minutos:</label>
+                                <input type="number" id="timer-minutes-input" min="1" max="120" value="25">
+                            </div>
+                            <button type="button" id="btn-timer-start" class="btn-v6 timer-action-btn">Iniciar</button>
+                            <button type="button" id="btn-timer-pause" class="btn-v6 timer-action-btn" style="display:none;">Pausar</button>
+                            <button type="button" id="btn-timer-reset" class="btn-v6 timer-action-btn">Resetar</button>
+                        </div>
+                
+                        <div id="pomodoro-controls" class="timer-buttons-v6">
+                            <button type="button" id="btn-pomodoro-start" class="btn-v6 timer-action-btn">Iniciar Foco</button>
+                            <button type="button" id="btn-pomodoro-pause" class="btn-v6 timer-action-btn" style="display:none;">Pausar</button>
+                            <button type="button" id="btn-pomodoro-skip" class="btn-v6 timer-action-btn" style="display:none;">Pular</button>
+                            <button type="button" id="btn-pomodoro-reset" class="btn-v6 timer-action-btn">Resetar Ciclos</button>
+                        </div>
+                    </div>
+                </section> 
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+</body>
+</html>

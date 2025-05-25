@@ -1,0 +1,274 @@
+/* static/agenda_profissional.css - Design Profissional com Header Ajustado */
+
+/* --- Variáveis CSS --- */
+:root {
+    --azul-principal: #1A3C6D;
+    --azul-principal-hover: #142f57;
+    --azul-principal-active: #0e2545;
+    --azul-secundario: #A3BFFA;
+    --azul-secundario-claro: #D6E4FF;
+    --azul-destaque-hover: #EBF4FF;
+    --cor-texto-primario: #111827;
+    --cor-texto-secundario: #4B5563;
+    --cor-texto-terciario: #9CA3AF;
+    --cor-borda: #D1D5DB; /* Borda geral sutil */
+    --cor-borda-input: var(--cor-borda); /* Consistência */
+    --cor-fundo-pagina: #F3F7FD;
+    --cor-fundo-card: #FFFFFF;
+    --sombra-card: 0 8px 16px rgba(26, 60, 109, 0.07), 0 4px 8px rgba(26, 60, 109, 0.05);
+    --raio-borda-card: 12px;
+    --raio-borda-elementos: 8px;
+    --fonte-titulo: 'Baloo 2', cursive;
+    --fonte-corpo: 'Manrope', sans-serif;
+}
+
+/* --- Reset Básico & Estilos Globais --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body.page-agenda {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-texto-primario);
+    background-color: var(--cor-fundo-pagina);
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Header do Site (Simplificado e Ajustado) --- */
+.site-header.simple-header {
+    background-color: var(--cor-fundo-card);
+    padding: 12px 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo base para botões de ação no header */
+.btn-header-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px; /* Padding base */
+    font-family: var(--fonte-corpo);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--raio-borda-elementos);
+    cursor: pointer;
+    text-decoration: none; /* Para <a> estilizado como botão */
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+/* Botão "Voltar" (estrutura <a><button>...</button></a>) */
+.header-voltar-link {
+    text-decoration: none;
+}
+.header-voltar-link > .btn-header-action { /* Estilo específico para o <button> dentro do link Voltar */
+    color: var(--azul-principal);
+    border: 2px solid var(--azul-principal); /* Borda mais grossa */
+    background-color: transparent;
+}
+.header-voltar-link > .btn-header-action:hover {
+    background-color: var(--azul-principal);
+    color: var(--cor-fundo-card); /* Texto (e SVG) fica branco */
+    border-color: var(--azul-principal);
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 3px 8px rgba(26, 60, 109, 0.15);
+}
+.header-voltar-link > .btn-header-action:active {
+    transform: translateY(0) scale(1);
+    background-color: var(--azul-principal-hover);
+    box-shadow: 0 1px 4px rgba(26, 60, 109, 0.1);
+}
+.header-voltar-link > .btn-header-action svg {
+    fill: currentColor; /* Herda a cor do texto do botão */
+    transition: fill 0.2s ease;
+}
+.header-voltar-link > .btn-header-action span {
+    vertical-align: middle;
+}
+
+/* Botão "Perfil" (<a> estilizado diretamente) */
+.btn-perfil { /* Aplicado ao <a> do Perfil */
+    /* Herda de .btn-header-action se você adicionar essa classe ao <a>, ou defina aqui: */
+    padding: 7px 14px; /* Consistente com o Voltar */
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--raio-borda-elementos);
+    text-decoration: none;
+
+    color: var(--cor-texto-secundario);
+    border: 2px solid var(--cor-borda); /* Borda cinza um pouco mais grossa */
+    background-color: transparent;
+}
+.btn-perfil:hover {
+    background-color: var(--cor-texto-secundario);
+    color: var(--cor-fundo-card);
+    border-color: var(--cor-texto-secundario);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(75, 85, 99, 0.15);
+}
+
+
+/* --- Wrapper e Título Principal da Agenda (no corpo da página) --- */
+.agenda-wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.agenda-main-title-container {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 20px; /* Espaço abaixo do header fixo */
+}
+.agenda-main-title-container h1 {
+    font-family: var(--fonte-titulo);
+    color: var(--azul-principal);
+    font-size: 2.4em;
+    font-weight: 700;
+}
+
+/* --- Mensagens Flash (Mantidas como na versão que você gostou) --- */
+.flashes { list-style-type: none; margin-bottom: 25px; max-width: 700px; margin-left: auto; margin-right: auto;}
+.flashes li { padding: 12px 18px; margin-bottom: 10px; border-radius: var(--raio-borda-elementos); font-size: 0.9em; font-weight: 500; display: flex; align-items: center; border: 1px solid transparent; box-shadow: 0 3px 8px rgba(0,0,0,0.07); }
+.flash-error, .flash-danger { background-color: #FEF2F2; color: #991B1B; border-color: #FECACA;}
+.flash-success { background-color: #F0FDF4; color: #166534; border-color: #BBF7D0;}
+.flash-info { background-color: #EFF6FF; color: #1E40AF; border-color: #BFDBFE;}
+
+
+/* --- Grid de Calendários e Estilos de Mês/Tabela (Restaurados para a versão que você gostou) --- */
+.calendars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 30px;
+}
+
+.calendar-month-card {
+    background-color: var(--cor-fundo-card);
+    border-radius: var(--raio-borda-card);
+    box-shadow: var(--sombra-card);
+    padding: 20px 25px;
+    border: 1px solid var(--cor-borda); /* Borda sutil para definição do card */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.calendar-month-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(255, 255, 255, 0.1), 0 6px 12px rgba(26, 60, 109, 0.07);
+}
+
+.month-title {
+    font-family: var(--fonte-titulo);
+    color: var(--azul-principal);
+    font-size: 1.5em;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.calendar-table thead th {
+    font-weight: 600;
+    color: var(--cor-texto-secundario);
+    padding: 10px 5px;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.calendar-table tbody td {
+    text-align: center;
+    padding: 2px; /* Pequeno padding para espaçar os links/dias */
+    height: 48px;
+}
+
+.calendar-table tbody td.empty-day {
+    background-color: #f8f9fa;
+    pointer-events: none;
+    border-color: #f1f3f5;
+}
+
+.day-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; 
+    height: 36px;
+    margin: auto; 
+    text-decoration: none;
+    color: var(--cor-texto-primario);
+    font-weight: 500;
+    border-radius: 50%; /* Dia como círculo */
+    border: 1.5px solid transparent;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.day-link:hover {
+    background-color: var(--azul-destaque-hover);
+    color: var(--azul-principal);
+    border-color: var(--azul-secundario-claro);
+    transform: scale(1.1);
+}
+.day-link.is-today {
+    background-color: var(--azul-principal);
+    color: var(--cor-fundo-card);
+    font-weight: 700;
+    border-color: var(--azul-principal-hover);
+}
+.day-link.is-today:hover {
+    background-color: var(--azul-principal-hover);
+    border-color: var(--azul-principal);
+}
+
+/* --- Responsividade (Mantida e ajustada para o novo header) --- */
+@media (max-width: 768px) {
+    .site-header { padding: 10px 15px; }
+    .header-container { /* Ajustes para telas menores, se necessário */ }
+    
+    .btn-header-action, .btn-perfil {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    .header-voltar-link > .btn-header-action svg { width: 16px; height: 16px; margin-right: 4px; }
+
+    .agenda-main-title-container h1 { font-size: 1.8em; }
+    .agenda-wrapper { margin-top: 20px; padding: 0 10px 20px 10px; }
+    .month-title { font-size: 1.3em; }
+    .calendar-table { font-size: 0.8rem; }
+    .calendar-table thead th { padding: 8px 2px; }
+    .calendar-table tbody td { height: 45px; }
+    .day-link { width: 32px; height: 32px; font-size: 0.85em; }
+}
+
+@media (max-width: 480px) {
+    .header-container { flex-wrap: wrap; /* Permite quebrar se necessário */ justify-content: center; gap:10px;}
+    .header-left, .header-right { flex-basis: 100%; display: flex; justify-content: center; }
+    .header-left { margin-bottom: 5px; /* Espaço se quebrar linha */ }
+
+
+    .agenda-main-title-container h1 { font-size: 1.7em; }
+    .month-title { font-size: 1.2em; }
+    .calendar-table thead th { font-size: 0.65rem; padding: 6px 1px; }
+    .calendar-table tbody td { height: 40px; }
+    .day-link { width: 28px; height: 28px; font-size: 0.8em; }
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Lab - Organize sua vida e equipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon/favicon.ico') }}">
+    </head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="{{ url_for('home') }}"> <img src="{{ url_for('static', filename='img/imagens/logoazul.png') }}" alt="Focus Lab Logo" class="logo-img">
+                </a>
+            </div>
+            <nav>
+                <a href="{{ url_for('login') }}" class="btn btn-secondary">Entrar</a>
+                <a href="{{ url_for('registro') }}" class="btn btn-primary">Comece de graça</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-background-wave"></div>
+            <div class="container hero-content-container">
+                <div class="hero-text">
+                    <h1>Organize sua vida e sua equipe de trabalho.</h1>
+                    <p>Tudo que sua equipe precisa para um ambiente de trabalho organizado, produtivo e eficiente.</p>
+                    <a href="{{ url_for('registro') }}" class="btn btn-hero">Comece de graça</a>
+                </div>
+                <div class="hero-image">
+                    <img src="{{ url_for('static', filename='img/imagens/bonecos.png') }}" alt="Ilustração de equipe organizada">
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <img src="{{ url_for('static', filename='img/imagens/calendario.png') }}" alt="Ícone Lista e Calendário">
+                        </div>
+                        <h3>Lista e calendário</h3>
+                        <p>Visualize de forma geral tarefas e compromissos em listas ou se preferir aumente seu foco visualizando-as na data específica em que estão agendadas.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                           <img src="{{ url_for('static', filename='img/imagens/vencidos.png') }}" alt="Ícone Lista de Tarefas Vencidas">
+                        </div>
+                        <h3>Lista de tarefas vencidas</h3>
+                        <p>Deixou vencer uma tarefa? Ops! Consulte todas as tarefas que passaram do prazo rapidamente com um clique.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                           <img src="{{ url_for('static', filename='img/imagens/lista.png') }}" alt="Ícone Listas de Hoje">
+                        </div>
+                        <h3>Listas de hoje, da semana e do mês</h3>
+                        <p>Visualize tarefas e compromissos em curto e médio prazo e programe-se com antecedência.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <img src="{{ url_for('static', filename='img/imagens/subtarefas.png') }}" alt="Ícone Registre Subtarefas">
+                        </div>
+                        <h3>Registre subtarefas</h3>
+                        <p>Subtarefas ajudam a quebrar uma tarefa em pedaços menores e facilitam na jornada da execução.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-intermediate">
+            <div class="container">
+                <h2>Junte-se à milhares de usuários que elevaram seus resultados</h2>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <div class="testimonials-grid">
+                    <article class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote">"Recomendo para qualquer agência de publicidade, ótima ferramenta de gestão de jobs, que ajuda DEMAISSSS e principalmente de produtividade. A equipe Fera."</p>
+                        <div class="author-info">
+                            <div>
+                                <p class="author-name">Martinez Henry</p>
+                                <p class="author-title">Creator</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote">"A Focus Lab é uma ferramenta muito completa e contribui muito nos processos da empresa e integração da equipe. Estamos muito satisfeitos!"</p>
+                        <div class="author-info">
+                            <div>
+                                <p class="author-name">Marcia McKinley</p>
+                                <p class="author-title">CEO</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote">"A única plataforma de gestão de projetos que consegui me adaptar. Gosto bastante e utilizo todos os dias. 100% homeoffice e todos com tranquilidade e produtividade."</p>
+                        <div class="author-info">
+                           <div>
+                                <p class="author-name">Darlene Robertson</p>
+                                <p class="author-title">Gestor</p>
+                           </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="final-cta">
+            <div class="container">
+                <h2>Encontre a calma e a clareza necessárias com a to do list mais querida do mundo</h2>
+                <a href="{{ url_for('registro') }}" class="btn btn-primary btn-larger">Comece agora</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo">
+                         <a href="{{ url_for('home') }}">
+                            <img src="{{ url_for('static', filename='img/imagens/logobranca.png') }}" alt="Focus Lab Logo" class="logo-img">
+                         </a>
+                    </div>
+                    <p>Junte-se a milhares de pessoas que organizam trabalho e vida pessoal.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Ferramentas</h4>
+                    <ul>
+                        <li><a href="#">Funcionalidades</a></li>
+                        <li><a href="#">Integrações</a></li>
+                        <li><a href="#">Preços</a></li>
+                        <li><a href="#">Templates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact-social">
+                    <h4>Contato</h4>
+                    <p>contato@focuslab.com</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><img src="{{ url_for('static', filename='img/imagens/iconefacebook.png') }}" alt="Facebook"></a>
+                        <a href="#" aria-label="Twitter"><img src="{{ url_for('static', filename='img/imagens/iconex.png') }}" alt="X"></a>
+                        <a href="#" aria-label="Instagram"><img src="{{ url_for('static', filename='img/imagens/iconeinstagram.png') }}" alt="Instagram"></a>
+                        <a href="#" aria-label="LinkedIn"><img src="{{ url_for('static', filename='img/imagens/iconelinkedin.png') }}" alt="Linkedin"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Focus Lab. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>

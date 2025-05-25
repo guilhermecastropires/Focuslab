@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crie sua Conta - Focus Lab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='registro.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon/favicon.ico') }}">
+</head>
+<body>
+    <div class="auth-page-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="{{ url_for('home') }}" class="auth-logo-link">
+                    <img src="{{ url_for('static', filename='img/imagens/logoazul.png') }}" alt="Focus Lab Logo" class="auth-logo">
+                </a>
+                <h1>Crie sua Conta</h1>
+                <p class="auth-subtitle">Preencha os campos abaixo para iniciar.</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              <ul class="flashes">
+              {% for category, message in messages %}
+                <li class="flash-{{ category }}">{{ message }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('registro') }}" id="registro-form" method="POST" class="auth-form">
+                <div class="form-group">
+                    <label for="primeiro_nome">Primeiro nome</label>
+                    <div class="input-icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/imagens/nome.png') }}" alt="" class="input-icon">
+                        <input type="text" name="primeiro_nome" id="primeiro_nome" required placeholder="Seu primeiro nome">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/imagens/email.png') }}" alt="" class="input-icon">
+                        <input type="email" name="email" id="email" required placeholder="seu@email.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <div class="input-icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/imagens/senha.png') }}" alt="" class="input-icon">
+                        <input type="password" name="senha" id="senha" required placeholder="Mínimo 6 caracteres" minlength="6">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmar_senha">Confirmar Senha</label>
+                    <div class="input-icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/imagens/senha.png') }}" alt="" class="input-icon">
+                        <input type="password" name="confirmar_senha" id="confirmar_senha" required placeholder="Repita a senha" minlength="6">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-submit">Criar Conta</button>
+                <p class="auth-switch-link">Já tem uma conta? <a href="{{ url_for('login') }}">Faça Login</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

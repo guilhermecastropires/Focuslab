@@ -1,0 +1,266 @@
+/* static/login.css - Estilo Profissional (Idêntico ao registro_profissional.css) */
+
+/* --- Variáveis CSS --- */
+:root {
+    --azul-principal: #1A3C6D;
+    --azul-principal-hover: #142f57;
+    --azul-principal-active: #0e2545;
+    --azul-secundario: #A3BFFA;
+    --azul-secundario-hover: #8faee8;
+    --cor-texto-primario: #1f2937; /* Cinza escuro para texto */
+    --cor-texto-secundario: #4b5563; /* Cinza médio */
+    --cor-borda-input: #d1d5db;
+    --cor-borda-input-focus: var(--azul-principal);
+    --cor-fundo-input: #f9fafb;
+    --cor-fundo-input-focus: #fff;
+    --cor-placeholder: #9ca3af;
+    --cor-fundo-pagina: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%); /* Gradiente suave */
+    --cor-fundo-card: #ffffff;
+    --sombra-card: 0 20px 40px -15px rgba(26, 60, 109, 0.12), 0 10px 20px -10px rgba(26, 60, 109, 0.08);
+    --raio-borda-geral: 10px; /* Raio de borda mais consistente */
+    --fonte-titulo: 'Baloo 2', cursive;
+    --fonte-corpo: 'Manrope', sans-serif;
+}
+
+/* --- Reset Básico & Estilos Globais --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-texto-primario);
+    background: var(--cor-fundo-pagina);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Wrapper da Página de Autenticação --- */
+.auth-page-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Card de Autenticação --- */
+.auth-card {
+    background-color: var(--cor-fundo-card);
+    padding: 35px 45px;
+    border-radius: var(--raio-borda-geral);
+    box-shadow: var(--sombra-card);
+    width: 100%;
+    max-width: 450px; /* Largura do card */
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-logo-link {
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.auth-logo {
+    max-height: 50px; /* Tamanho do logo */
+    width: auto;
+    transition: transform 0.3s ease;
+}
+.auth-logo:hover {
+    transform: scale(1.05);
+}
+
+.auth-header h1 {
+    font-family: var(--fonte-titulo);
+    color: var(--azul-principal);
+    font-size: 2em; /* Baloo 2 tende a parecer grande, ajuste */
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.auth-subtitle {
+    font-size: 0.95em;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 25px;
+}
+
+/* --- Mensagens Flash --- */
+.flashes {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+.flashes li {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    font-size: 0.875em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+}
+.flash-error, .flash-danger { background-color: #fff5f5; color: #c53030; border-color: #fed7d7;}
+.flash-success { background-color: #f0fff4; color: #2f855a; border-color: #c6f6d5;}
+.flash-info { background-color: #ebf8ff; color: #2b6cb0; border-color: #bee3f8;}
+
+/* --- Formulário de Autenticação --- */
+.auth-form .form-group {
+    margin-bottom: 20px; /* Aumentado para dar mais respiro */
+    position: relative;
+}
+
+.auth-form label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 6px;
+    transition: color 0.2s ease;
+}
+
+.form-group:focus-within label {
+    color: var(--azul-principal);
+}
+
+.input-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon { /* Estilo para a tag <img> do ícone */
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--cor-placeholder); /* Para SVGs com fill="currentColor" */
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.form-group:focus-within .input-icon {
+    color: var(--azul-principal); /* Para SVGs com fill="currentColor" */
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+    font-family: var(--fonte-corpo);
+    width: 100%;
+    padding: 10px 15px 10px 45px; /* Padding esquerdo para ícone */
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--cor-texto-primario);
+    background-color: var(--cor-fundo-input);
+    border: 1px solid var(--cor-borda-input);
+    border-radius: var(--raio-borda-geral);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.auth-form input[type="text"]:focus,
+.auth-form input[type="email"]:focus,
+.auth-form input[type="password"]:focus {
+    outline: none;
+    border-color: var(--cor-borda-input-focus);
+    background-color: var(--cor-fundo-input-focus);
+    box-shadow: 0 0 0 3px rgba(26, 60, 109, 0.1);
+}
+
+.auth-form input::placeholder {
+    color: var(--cor-placeholder);
+    font-weight: 400;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px 20px;
+    font-family: var(--fonte-titulo);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #fff;
+    background-color: var(--azul-principal);
+    border: none;
+    border-radius: var(--raio-borda-geral);
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px -2px rgba(26, 60, 109, 0.25);
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    margin-top: 10px; /* Espaço acima do botão, ajustado */
+}
+/* O último .form-group já tem margin-bottom, então o margin-top aqui pode ser menor ou zero se o espaçamento estiver bom */
+#login-form .form-group:last-of-type { /* Para o último campo (senha) */
+    margin-bottom: 25px; /* Mais espaço antes do botão */
+}
+
+
+.btn-submit:hover {
+    background-color: var(--azul-principal-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px -3px rgba(26, 60, 109, 0.3);
+}
+
+.btn-submit:active {
+    background-color: var(--azul-principal-active);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px -3px rgba(26, 60, 109, 0.25);
+}
+
+.auth-switch-link {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--cor-texto-secundario);
+}
+
+.auth-switch-link a {
+    font-weight: 700;
+    color: var(--azul-principal);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.auth-switch-link a:hover {
+    color: var(--azul-principal-hover);
+    text-decoration: underline;
+}
+
+/* --- Responsividade (Exemplo básico) --- */
+@media (max-width: 500px) {
+    .auth-card {
+        margin: 20px 0;
+        padding: 25px 30px;
+        box-shadow: none;
+    }
+    .auth-header h1 {
+        font-size: 1.8em;
+    }
+    .auth-subtitle {
+        font-size: 0.9em;
+        margin-bottom: 20px;
+    }
+    .auth-form input[type="text"],
+    .auth-form input[type="email"],
+    .auth-form input[type="password"] {
+        padding: 10px 12px 10px 40px;
+        font-size: 0.85rem;
+    }
+    .btn-submit {
+        font-size: 0.95rem;
+        padding: 10px 15px;
+    }
+}

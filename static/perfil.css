@@ -1,0 +1,275 @@
+/* static/perfil.css - Estilo Profissional Azul para Perfil */
+
+/* --- Variáveis CSS (Consistente com estilos anteriores) --- */
+:root {
+    --azul-principal: #1A3C6D;
+    --azul-principal-hover: #142f57;
+    --azul-principal-active: #0e2545;
+    --azul-secundario: #A3BFFA;
+    --azul-secundario-claro: #D6E4FF;
+    --azul-destaque-hover: #EBF4FF;
+    --cor-texto-primario: #111827; /* Preto suave */
+    --cor-texto-secundario: #4B5563; /* Cinza escuro */
+    --cor-texto-terciario: #6B7280; /* Cinza médio-claro */
+    --cor-borda: #D1D5DB; /* Cinza para bordas */
+    --cor-fundo-pagina: #F3F7FD; /* Azul muito, muito claro, quase branco */
+    --cor-fundo-card: #FFFFFF;
+    --sombra-card: 0 10px 20px -5px rgba(26, 60, 109, 0.1), 0 6px 12px -6px rgba(26, 60, 109, 0.07);
+    --raio-borda-card: 12px;
+    --raio-borda-elementos: 8px;
+    --fonte-titulo: 'Baloo 2', cursive;
+    --fonte-corpo: 'Manrope', sans-serif;
+}
+
+/* --- Reset Básico & Estilos Globais --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body.page-perfil {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-texto-primario);
+    background-color: var(--cor-fundo-pagina);
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Header do Site (Reutilizado da Agenda) --- */
+.site-header.simple-header {
+    background-color: var(--cor-fundo-card);
+    padding: 12px 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.header-left, .header-right { display: flex; align-items: center; }
+.header-center .page-title-header {
+    font-family: var(--fonte-titulo);
+    color: var(--azul-principal);
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0;
+}
+.btn-header-action {
+    display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px;
+    font-family: var(--fonte-corpo); font-size: 0.875rem; font-weight: 600;
+    border-radius: var(--raio-borda-elementos); cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    background-color: transparent; text-decoration: none; border: 2px solid transparent;
+}
+.header-voltar-link > .btn-header-action { color: var(--azul-principal); border-color: var(--azul-secundario-claro); }
+.header-voltar-link > .btn-header-action:hover { background-color: var(--azul-destaque-hover); border-color: var(--azul-principal); color: var(--azul-principal-hover); transform: translateY(-1px); box-shadow: 0 3px 8px rgba(26, 60, 109, 0.15); }
+.header-voltar-link > .btn-header-action svg { fill: currentColor; }
+.header-voltar-link > .btn-header-action span { vertical-align: middle; }
+
+.btn-logout-perfil { /* Botão Sair específico */
+    color: #DC2626; /* Vermelho */
+    border-color: #FCA5A5; /* Borda vermelha clara */
+}
+.btn-logout-perfil:hover {
+    background-color: #DC2626;
+    color: var(--cor-fundo-card);
+    border-color: #DC2626;
+    transform: translateY(-1px);
+}
+
+/* --- Wrapper do Conteúdo do Perfil --- */
+.profile-wrapper {
+    max-width: 800px; /* Largura para conteúdo do perfil */
+    margin: 30px auto 0 auto;
+    padding: 0 20px 40px 20px;
+}
+
+/* --- Mensagens Flash (Reutilizadas) --- */
+.flashes { list-style-type: none; margin-bottom: 25px; max-width: 100%; }
+.flashes li { padding: 12px 18px; margin-bottom: 10px; border-radius: var(--raio-borda-elementos); font-size: 0.9em; font-weight: 500; display: flex; align-items: center; border: 1px solid transparent; box-shadow: 0 3px 8px rgba(0,0,0,0.07); }
+.flash-error, .flash-danger { background-color: #FEF2F2; color: #991B1B; border-color: #FECACA;}
+.flash-success { background-color: #F0FDF4; color: #166534; border-color: #BBF7D0;}
+.flash-info { background-color: #EFF6FF; color: #1E40AF; border-color: #BFDBFE;}
+
+
+/* --- Card de Estilo Genérico (reutilizável) --- */
+.card-style {
+    background-color: var(--cor-fundo-card);
+    padding: 25px 30px;
+    border-radius: var(--raio-borda-card);
+    box-shadow: var(--sombra-card);
+    margin-bottom: 30px;
+    border: 1px solid var(--cor-borda);
+}
+.card-style h3 { /* Título dentro dos cards de edição */
+    font-family: var(--fonte-titulo);
+    color: var(--azul-principal);
+    font-size: 1.4em;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+/* --- Card Principal de Informações do Perfil --- */
+.profile-main-info {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 30px; /* Mais padding para o card principal */
+}
+.profile-picture-section {
+    flex-shrink: 0;
+}
+.profile-img {
+    width: 120px; /* Tamanho maior para foto de perfil */
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover; /* Garante que a imagem cubra sem distorcer */
+    border: 3px solid var(--cor-fundo-card); /* Pequena borda para destacar */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.profile-img-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: var(--cor-fundo-pagina);
+    border: 1px dashed var(--cor-borda);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cor-texto-terciario);
+}
+.profile-img-placeholder svg {
+    width: 50%;
+    height: 50%;
+}
+
+.profile-details-section h2 { /* Nome do usuário */
+    font-family: var(--fonte-titulo);
+    color: var(--azul-principal);
+    font-size: 2em; /* Nome destacado */
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.profile-email {
+    font-size: 1rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 3px;
+    word-break: break-all; /* Para emails longos */
+}
+.profile-member-since {
+    font-size: 0.85rem;
+    color: var(--cor-texto-terciario);
+}
+
+/* --- Grid para Formulários de Edição --- */
+.profile-forms-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Uma coluna por padrão */
+    gap: 30px;
+}
+@media (min-width: 768px) { /* Duas colunas em telas maiores */
+    .profile-forms-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+/* --- Formulários de Edição --- */
+.form-layout { display: flex; flex-direction: column; gap: 18px; }
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+.form-layout input[type="text"],
+.form-layout input[type="file"] {
+    width: 100%;
+    padding: 10px 14px;
+    font-family: var(--fonte-corpo);
+    font-size: 0.95rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda-elementos);
+    background-color: var(--cor-fundo-input);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-layout input[type="text"]:focus {
+    outline: none;
+    border-color: var(--azul-principal);
+    box-shadow: 0 0 0 3px rgba(26, 60, 109, 0.12);
+}
+.input-file { /* Estilo para input de arquivo */
+    padding: 8px 12px; /* Padding um pouco diferente para input file */
+    cursor: pointer;
+}
+.input-file:hover {
+    border-color: var(--azul-secundario);
+}
+.form-text { /* Texto de ajuda/small */
+    display: block;
+    font-size: 0.8rem;
+    color: var(--cor-texto-terciario);
+    margin-top: 5px;
+}
+
+.btn-submit { /* Botões "Salvar Nome", "Salvar Foto" */
+    background-color: var(--azul-principal);
+    color: var(--cor-fundo-card);
+    padding: 10px 18px;
+    font-family: var(--fonte-titulo);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: var(--raio-borda-elementos);
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    align-self: flex-start; /* Para não ocupar largura total */
+    min-width: 150px;
+    box-shadow: 0 4px 10px -2px rgba(26, 60, 109, 0.3);
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+.btn-submit:hover {
+    background-color: var(--azul-principal-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -2px rgba(26, 60, 109, 0.35);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+    .profile-main-info {
+        flex-direction: column; /* Empilha foto e detalhes */
+        text-align: center;
+        gap: 20px;
+    }
+    .profile-details-section h2 { font-size: 1.8em; }
+    .profile-forms-grid { grid-template-columns: 1fr; } /* Garante uma coluna */
+    .card-style { padding: 20px; }
+    .btn-submit { align-self: stretch; } /* Botões ocupam largura total */
+}
+
+@media (max-width: 480px) {
+    .site-header.simple-header { padding: 10px 15px; }
+    .header-container { flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .header-left { order: 1; }
+    .header-center { order: 3; width: 100%; text-align: center; margin-top: 5px; }
+    .header-right { order: 2; }
+    .page-title-header { font-size: 1.3em; }
+
+    .profile-wrapper { padding: 0 15px 30px 15px; margin-top: 20px; }
+    .profile-main-info { padding: 20px; }
+    .profile-img, .profile-img-placeholder { width: 100px; height: 100px; }
+    .profile-details-section h2 { font-size: 1.6em; }
+    .card-style h3 { font-size: 1.2em; }
+}
+

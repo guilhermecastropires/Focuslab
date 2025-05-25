@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda {{ ano }} - Focus Lab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='agenda.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon/favicon.ico') }}">
+</head>
+<body class="page-agenda">
+
+    <header class="site-header simple-header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="{{ url_for('dashboard_dia_url', data=data_filtrada if data_filtrada else '%02d-%02d-%s' % (now.day, now.month, now.year)) }}" class="button-link header-voltar-link">
+                    <button type="button" class="btn-header-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                            <path d="M7.82843 10.9999H20V12.9999H7.82843L13.1924 18.3638L11.7782 19.778L4 11.9999L11.7782 4.22168L13.1924 5.63589L7.82843 10.9999Z"></path>
+                        </svg>
+                        <span>Voltar</span>
+                    </button>
+                </a>
+            </div>
+            <div class="header-right">
+                <nav class="main-navigation">
+                    <a href="{{ url_for('perfil') }}" class="btn btn-header-action btn-perfil">Perfil</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="agenda-wrapper">
+        <div class="agenda-main-title-container">
+            <h1>Agenda {{ ano }}</h1>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+            {% for category, message in messages %}
+              <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <div class="calendars-grid">
+            {% for mes_num, semanas in calendario.items() %}
+                <section class="calendar-month-card">
+                    <h2 class="month-title">{{ meses[mes_num - 1] }}</h2>
+                    <table class="calendar-table">
+                        <thead>
+                            <tr>
+                                {% for dia_semana in dias_semana %}
+                                    <th>{{ dia_semana[:3] }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for semana in semanas %}
+                                <tr>
+                                    {% for dia, dia_semana_num in semana %}
+                                        <td class="{{ 'has-day' if dia != 0 else 'empty-day' }}">
+                                            {% if dia != 0 %}
+                                                {% set is_today = (dia == dia_atual and mes_num == mes_atual and ano == ano_atual) if (dia_atual is defined and mes_atual is defined and ano_atual is defined) else false %}
+                                                <a href="{{ url_for('dashboard_dia_url', data='%02d-%02d-%s' % (dia, mes_num, ano)) }}"
+                                                   class="day-link {{ 'is-today' if is_today else '' }}">
+                                                   {{ dia }}
+                                                </a>
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

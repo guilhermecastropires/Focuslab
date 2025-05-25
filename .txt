@@ -1,0 +1,4 @@
+venv/scripts/activate
+pip install -r requirements.txt
+python main.py
+DB Browser for SQLite 3.13.1

@@ -1,0 +1,735 @@
+/* static/dashboard.css - Design Profissional e Completo (v6) */
+
+/* --- Variáveis CSS --- */
+:root {
+    --azul-principal: #1A3C6D;
+    --azul-principal-hover: #142f57;
+    --azul-principal-active: #0e2545;
+    --azul-secundario: #A3BFFA;
+    --azul-secundario-claro: #D6E4FF;
+    --azul-destaque-hover: #EBF4FF;
+    --verde-sucesso: #16A34A;
+    --verde-sucesso-fundo: #F0FDF4;
+    --vermelho-perigo: #DC2626;
+    --vermelho-perigo-fundo: #FEF2F2;
+    --cor-texto-primario: #111827;
+    --cor-texto-secundario: #374151;
+    --cor-texto-terciario: #6B7280;
+    --cor-borda: #E5E7EB;
+    --cor-borda-input: #D1D5DB;
+    --cor-fundo-pagina: #F9FAFB;
+    --cor-fundo-card: #FFFFFF;
+    --cor-fundo-input: #F9FAFB;
+    --cor-fundo-input-focus: #fff;
+    --cor-placeholder: #9CA3AF;
+    --sombra-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --sombra-card-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.07);
+    --raio-borda-card: 12px;
+    --raio-borda-elementos: 8px;
+    --fonte-titulo: 'Baloo 2', cursive;
+    --fonte-corpo: 'Manrope', sans-serif;
+    --header-height: 56px; /* Estimativa da altura do header para cálculos */
+}
+
+/* --- Reset Básico & Estilos Globais --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* MODIFICADO: body para layout flex com header e conteúdo principal */
+body.page-dashboard-v6 {
+    font-family: var(--fonte-corpo);
+    color: var(--cor-texto-primario);
+    background-color: var(--cor-fundo-pagina);
+    min-height: 100vh;
+    max-height: 100vh; /* Para evitar scroll no body se os filhos controlarem */
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden; /* Impede scroll no body, filhos devem controlar seu próprio scroll */
+}
+
+/* --- Header do Site --- */
+.site-header-v6.simple-header {
+    background-color: var(--cor-fundo-card);
+    padding: 10px 25px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    z-index: 1000;
+    flex-shrink: 0; /* Header não encolhe */
+    height: var(--header-height); /* Definindo altura explícita */
+}
+
+.header-container-v6 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1300px;
+    margin: 0 auto;
+    height: 100%; /* Para alinhar itens dentro da altura do header */
+    gap: 15px;
+}
+
+.header-left-v6,
+.header-right-v6 {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.site-logo-link-header-v6 .header-logo-img-v6 {
+    max-height: 36px;
+    display: block;
+    transition: opacity 0.2s ease;
+}
+
+.site-logo-link-header-v6:hover .header-logo-img-v6 {
+    opacity: 0.8;
+}
+
+.header-center-v6 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.header-center-v6 .page-title-header-v6 {
+    font-family: var(--fonte-titulo);
+    color: var(--azul-principal);
+    font-size: 1.3em;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-header-nav-v6 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    color: var(--azul-principal);
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.btn-header-nav-v6:hover {
+    background-color: var(--azul-destaque-hover);
+    color: var(--azul-principal-hover);
+}
+
+.btn-header-nav-v6 svg {
+    fill: currentColor;
+}
+
+.main-navigation-v6 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-header-action-v6 {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    font-family: var(--fonte-corpo);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: var(--raio-borda-elementos);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    background-color: transparent;
+    text-decoration: none;
+    border: 1.5px solid transparent;
+}
+
+.btn-perfil-v6 {
+    color: var(--cor-texto-secundario);
+    border-color: var(--cor-borda);
+}
+
+.btn-perfil-v6:hover {
+    background-color: var(--cor-fundo-pagina);
+    border-color: var(--cor-texto-secundario);
+    color: var(--cor-texto-primario);
+    transform: translateY(-1px);
+}
+
+
+/* NOVO: Layout principal com Sidebar e Conteúdo */
+.dashboard-layout-container-v6 {
+    display: flex;
+    flex-grow: 1; /* Ocupa o restante da altura (body é flex-column) */
+    height: calc(100vh - var(--header-height)); /* Altura total menos o header */
+    overflow: hidden; /* Evita scroll duplo, filhos controlam seu scroll */
+}
+
+/* NOVA BARRA LATERAL */
+.dashboard-sidebar-v6 {
+    width: 220px;
+    flex-shrink: 0;
+    background-color: var(--cor-fundo-card);
+    border-right: 1px solid var(--cor-borda);
+    padding-top: 25px;
+    height: 100%; /* Ocupa a altura do .dashboard-layout-container-v6 */
+    overflow-y: auto; /* Scroll se os links excederem a altura */
+}
+
+.sidebar-nav-v6 {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sidebar-link-v6 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-family: var(--fonte-corpo);
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    border-left: 3px solid transparent;
+    transition: background-color 0.2s ease, color 0.2s ease, border-left-color 0.2s ease;
+}
+
+.sidebar-link-v6:hover {
+    background-color: var(--azul-destaque-hover);
+    color: var(--azul-principal);
+    border-left-color: var(--azul-principal-hover);
+}
+
+.sidebar-link-v6.active {
+    background-color: var(--azul-destaque-hover);
+    color: var(--azul-principal);
+    font-weight: 600;
+    border-left-color: var(--azul-principal);
+}
+
+.sidebar-link-v6 svg {
+    fill: currentColor;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+/* MODIFICADO: Wrapper do Conteúdo Principal do Dashboard (agora ao lado da sidebar) */
+.dashboard-wrapper-v6 {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    padding: 25px;
+    overflow-y: auto; /* Permite scroll APENAS no conteúdo principal */
+    height: 100%; /* Ocupa a altura do .dashboard-layout-container-v6 */
+    margin: 0; /* Remove margens anteriores de centralização */
+    max-width: none; /* Permite ocupar todo o espaço flexível */
+}
+
+/* --- Mensagens Flash (Mantido) --- */
+.flashes-v6 {
+    list-style-type: none;
+    margin-bottom: 20px;
+    max-width: 100%; /* Para não exceder o contêiner do grid */
+}
+/* ... demais estilos de .flashes-v6 e .flash-* mantidos ... */
+.flashes-v6 li {
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    border-radius: var(--raio-borda-elementos);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.flash-error, 
+.flash-danger {
+    background-color: var(--vermelho-perigo-fundo);
+    color: var(--vermelho-perigo);
+    border-color: var(--vermelho-perigo);
+}
+.flash-success {
+    background-color: var(--verde-sucesso-fundo);
+    color: var(--verde-sucesso);
+    border-color: var(--verde-sucesso);
+}
+.flash-info {
+    background-color: var(--azul-destaque-hover);
+    color: var(--azul-principal);
+    border-color: var(--azul-secundario-claro);
+}
+
+
+/* --- Grid do Dashboard (Mantido, mas agora dentro de .dashboard-wrapper-v6) --- */
+.dashboard-grid-v6 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    max-width: 1300px; /* Para centralizar o conteúdo do grid se wrapper for maior */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 992px) {
+    .dashboard-grid-v6 {
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    }
+    /* Se o timer for o terceiro item, ele irá para a próxima linha.
+       Para 3 colunas, seria algo como:
+       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+       Ou explicitamente 3 colunas:
+       grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,0.8fr); (Exemplo)
+    */
+}
+
+/* --- Card de Estilo Genérico (Mantido) --- */
+.card-style-v6 {
+    background-color: var(--cor-fundo-card);
+    border-radius: var(--raio-borda-card);
+    box-shadow: var(--sombra-card);
+    border: 1px solid var(--cor-borda);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s ease-in-out;
+}
+/* ... demais estilos de .card-style-v6, .card-header-v6, etc. mantidos ... */
+.card-style-v6:hover {
+    box-shadow: var(--sombra-card-hover);
+}
+.card-header-v6 {
+    padding: 18px 25px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+.card-header-v6 h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--azul-principal);
+    font-size: 1.35em;
+    font-weight: 700;
+    margin: 0;
+}
+.card-body-v6 {
+    padding: 20px 25px;
+    flex-grow: 1;
+    display: flex; /* Para o timer-pomodoro-body */
+    flex-direction: column; /* Para o timer-pomodoro-body */
+}
+.card-footer-v6 {
+    padding: 15px 25px;
+    background-color: var(--cor-fundo-pagina);
+    border-top: 1px solid var(--cor-borda);
+    border-bottom-left-radius: var(--raio-borda-card);
+    border-bottom-right-radius: var(--raio-borda-card);
+}
+.card-footer-v6 h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--azul-principal);
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+
+/* --- Formulários (Mantidos) --- */
+/* ... Todos os seus estilos .form-layout-v6, .form-group-v6, inputs, etc. ... */
+.form-layout-v6 {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.form-group-v6 {
+    margin-bottom: 5px;
+}
+.form-group-v6 label {
+    display: block;
+    font-weight: 500;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+}
+.form-layout-v6 textarea,
+.form-layout-v6 input[type="text"],
+.form-layout-v6 select {
+    width: 100%;
+    padding: 10px 14px;
+    font-family: var(--fonte-corpo);
+    font-size: 0.9rem;
+    border: 1px solid var(--cor-borda-input);
+    border-radius: var(--raio-borda-elementos);
+    background-color: var(--cor-fundo-input);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    color: var(--cor-texto-primario);
+}
+.form-layout-v6 textarea:focus,
+.form-layout-v6 input[type="text"]:focus,
+.form-layout-v6 select:focus {
+    outline: none;
+    border-color: var(--azul-principal);
+    box-shadow: 0 0 0 3px rgba(26, 60, 109, 0.12);
+    background-color: var(--cor-fundo-input-focus);
+}
+.form-layout-v6 textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+.form-layout-v6 select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236B7280%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: .6em auto;
+    padding-right: 35px;
+}
+.task-color-select-v6 {
+    min-width: 120px;
+}
+.btn-v6 {
+    padding: 9px 16px; font-family: var(--fonte-titulo); font-size: 0.9rem;
+    font-weight: 600; border-radius: var(--raio-borda-elementos); cursor: pointer;
+    border: none; text-transform: uppercase; letter-spacing: 0.5px;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-submit-v6 {
+    background-color: var(--azul-principal);
+    color: var(--cor-fundo-card);
+    align-self: flex-start;
+    box-shadow: 0 2px 5px rgba(26, 60, 109, 0.2);
+}
+.btn-submit-v6.btn-full-width-v6 {
+    align-self: stretch;
+}
+.btn-submit-v6:hover {
+    background-color: var(--azul-principal-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(26, 60, 109, 0.25);
+}
+.btn-submit-v6.btn-small-v6 {
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    min-width: auto;
+}
+.btn-submit-v6.btn-icon-v6 svg {
+    fill: currentColor;
+}
+.inline-form-v6 {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.inline-form-v6 .form-group-v6 {
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+.inline-form-v6 .form-group-v6.task-color-group-v6 {
+    flex-grow: 0;
+    min-width: 110px;
+}
+.inline-form-v6 .btn-submit-v6 {
+    align-self: flex-end;
+}
+
+
+/* --- Lista de Tarefas (Mantido) --- */
+/* ... Todos os seus estilos .task-list-v6, .task-item-v6, etc. ... */
+.task-list-v6 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+}
+.task-item-v6 {
+    display: flex;
+    align-items: center;
+    padding: 10px 5px;
+    border-bottom: 1px solid #F0F3F7;
+    transition: background-color 0.15s ease;
+    gap: 12px;
+}
+.task-item-v6:hover {
+    background-color: var(--azul-destaque-hover);
+}
+.task-item-v6:last-child {
+    border-bottom: none;
+}
+.task-main-content-v6 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
+}
+.task-toggle-form-v6 {
+    display: inline-flex;
+}
+.task-checkbox-v6 {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+.checkbox-custom-label-v6 {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--cor-borda);
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    background-color: var(--cor-fundo-card);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+}
+.task-checkbox-v6:focus + .checkbox-custom-label-v6 {
+    border-color: var(--azul-principal);
+    box-shadow: 0 0 0 2.5px var(--azul-secundario-claro);
+}
+.task-checkbox-v6:checked + .checkbox-custom-label-v6 {
+    background-color: var(--verde-sucesso);
+    border-color: var(--verde-sucesso);
+}
+.task-checkbox-v6:checked + .checkbox-custom-label-v6::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 4px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.task-name-v6 {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    cursor: pointer;
+    word-break: break-word;
+    font-weight: 500;
+}
+.task-item-v6.task-done-v6 .task-name-v6 {
+    color: var(--cor-texto-terciario) !important;
+    text-decoration: line-through;
+    text-decoration-color: var(--cor-texto-terciario);
+    opacity: 0.8;
+    font-weight: 400;
+}
+.task-delete-form-v6 { margin-left: auto; flex-shrink: 0; }
+.btn-delete-task-v6 {
+    background-color: transparent;
+    color: var(--cor-texto-terciario);
+    border: none;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.btn-delete-task-v6:hover {
+    background-color: var(--vermelho-perigo-fundo);
+    color: var(--vermelho-perigo);
+}
+.btn-delete-task-v6 svg {
+    fill: currentColor;
+    width: 16px;
+    height: 16px;
+}
+
+
+/* --- Empty State (Mantido) --- */
+.empty-state-container-v6 { text-align: center; padding: 30px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; }
+.empty-state-icon-v6 { color: var(--azul-secundario-claro); margin-bottom: 15px; }
+.empty-state-text-v6 { color: var(--cor-texto-secundario); font-size: 0.95rem; }
+
+/* --- Estilos do Timer/Pomodoro (Mantidos da sua versão anterior que funcionava) --- */
+.timer-pomodoro-section-v6 .timer-pomodoro-body {
+    /* display: flex; (já está no .card-body-v6) */
+    /* flex-direction: column; (já está no .card-body-v6) */
+    align-items: center; 
+    gap: 15px; 
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.timer-mode-switcher-v6 { display: flex; gap: 8px; margin-bottom: 10px; }
+.btn-mode-v6 {
+    padding: 8px 16px; font-family: var(--fonte-corpo); font-size: 0.85rem;
+    font-weight: 500; border: 1px solid var(--cor-borda-input);
+    background-color: var(--cor-fundo-input); color: var(--cor-texto-secundario);
+    border-radius: var(--raio-borda-elementos); cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn-mode-v6:hover { border-color: var(--azul-secundario); color: var(--azul-principal); }
+.btn-mode-v6.active {
+    background-color: var(--azul-principal); color: var(--cor-fundo-card);
+    border-color: var(--azul-principal); font-weight: 600;
+}
+.timer-display-v6 {
+    font-family: var(--fonte-corpo); font-size: 3em;
+    color: var(--azul-principal); font-weight: 700;
+    margin-bottom: 0px; line-height: 1.1;
+}
+.timer-status-v6 {
+    font-size: 0.9rem; color: var(--cor-texto-terciario);
+    margin-bottom: 15px; min-height: 1.2em; font-weight: 500;
+}
+.timer-buttons-v6 {
+    display: flex; gap: 10px; align-items: center;
+    flex-wrap: wrap; justify-content: center;
+}
+.timer-input-group { display: flex; align-items: center; gap: 8px; }
+.timer-input-group label {
+    font-size: 0.85rem; color: var(--cor-texto-secundario); font-weight: 500;
+}
+#timer-minutes-input {
+    width: 70px; padding: 8px 10px; font-family: var(--fonte-corpo);
+    font-size: 0.9rem; border: 1px solid var(--cor-borda-input);
+    border-radius: var(--raio-borda-elementos); background-color: var(--cor-fundo-input);
+    text-align: center; color: var(--cor-texto-primario);
+}
+#timer-minutes-input:focus {
+    outline: none; border-color: var(--azul-principal);
+    box-shadow: 0 0 0 3px rgba(26, 60, 109, 0.12);
+    background-color: var(--cor-fundo-input-focus);
+}
+.timer-action-btn { min-width: 100px; justify-content: center; }
+#btn-timer-start, #btn-pomodoro-start { background-color: var(--verde-sucesso); color: white; }
+#btn-timer-start:hover, #btn-pomodoro-start:hover { background-color: #15803D; }
+#btn-timer-pause, #btn-pomodoro-pause { background-color: #FACC15; color: var(--cor-texto-primario); }
+#btn-timer-pause:hover, #btn-pomodoro-pause:hover { background-color: #EAB308; }
+#btn-timer-reset, #btn-pomodoro-reset, #btn-pomodoro-skip {
+    background-color: var(--cor-fundo-input); color: var(--cor-texto-secundario);
+    border: 1px solid var(--cor-borda-input);
+}
+#btn-timer-reset:hover, #btn-pomodoro-reset:hover, #btn-pomodoro-skip:hover {
+    background-color: var(--cor-borda); color: var(--cor-texto-primario);
+}
+
+
+/* REMOVIDO: Estilos da Navegação Inferior Antiga */
+/*
+.dashboard-bottom-nav-v6 { ... }
+.btn-nav-bottom-v6 { ... }
+*/
+
+/* --- Utilitários (Mantido) --- */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+
+/* --- Responsividade --- */
+@media (max-width: 991px) { /* Ponto de quebra para sidebar virar barra superior */
+    .dashboard-layout-container-v6 {
+        flex-direction: column;
+        height: auto; /* Altura auto quando empilhado */
+        overflow: visible; /* Permite que o conteúdo determine a altura */
+    }
+
+    .dashboard-sidebar-v6 {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--cor-borda);
+        padding-top: 0;
+        overflow-y: visible;
+        /* Opcional: fazer a barra de navegação sticky abaixo do header principal */
+        /* position: sticky; */
+        /* top: var(--header-height); */ /* Altura do header principal */
+        /* background-color: var(--cor-fundo-card); */ /* Para não ser transparente se sticky */
+        /* z-index: 999; */ /* Para ficar sobre o conteúdo ao rolar */
+    }
+
+    .sidebar-nav-v6 {
+        flex-direction: row;
+        justify-content: center;
+        padding: 5px 0; /* Padding menor para barra */
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .sidebar-link-v6 {
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        border-radius: var(--raio-borda-elementos);
+    }
+    .sidebar-link-v6 svg { width: 18px; height: 18px; }
+
+    .sidebar-link-v6:hover {
+        border-left-color: transparent; /* Remove borda esquerda no hover */
+        border-bottom-color: var(--azul-principal-hover);
+    }
+    .sidebar-link-v6.active {
+        border-left-color: transparent; /* Remove borda esquerda no active */
+        border-bottom-color: var(--azul-principal);
+    }
+    
+    .dashboard-wrapper-v6 {
+        height: auto; /* Altura auto quando empilhado */
+        padding: 20px; /* Ajuste de padding */
+        overflow-y: visible; /* Permite que determine sua própria altura */
+    }
+
+    /* Ajustes de header que você já tinha para 768px */
+    .site-header-v6.simple-header { padding: 10px 15px; }
+    .header-container-v6 { flex-wrap: wrap; } 
+    .header-left-v6 { order: 1; }
+    .header-right-v6 { order: 2; }
+    .header-center-v6 { 
+        order: 3; 
+        width: 100%; 
+        margin-top: 8px; 
+        margin-bottom: 5px;
+    }
+    .header-center-v6 .page-title-header-v6 { font-size: 1.2em; }
+
+    /* Grid volta para 1 coluna */
+    .dashboard-grid-v6 { grid-template-columns: 1fr !important; } /* !important para garantir override */
+    .card-style-v6 { padding: 20px; } 
+    .card-header-v6 h2 { font-size: 1.25em; } 
+    .card-footer-v6 h3 { font-size: 1.05em; } 
+    .inline-form-v6 { flex-direction: column; align-items: stretch; } 
+    .inline-form-v6 .form-group-v6 { width: 100%; } 
+    .inline-form-v6 .btn-submit-v6 { align-self: stretch; } 
+}
+
+@media (max-width: 480px) {
+    .header-center-v6 .page-title-header-v6 { font-size: 1.1em; }
+    .header-container-v6 { gap: 8px; }
+    .header-right-v6 .main-navigation-v6 { width:100%; justify-content: flex-end; }
+
+    .header-center-v6 { gap: 8px; }
+    .btn-header-nav-v6 svg { width: 24px; height: 24px; }
+    .btn-header-nav-v6 { padding: 6px; }
+    
+    .sidebar-link-v6 span { display: none; } /* Mostra só ícone na barra superior em telas muito pequenas */
+    .sidebar-link-v6 { padding: 8px; }
+    .sidebar-nav-v6 { padding: 5px; justify-content: space-around; }
+
+
+    .form-layout-v6 textarea,
+    .form-layout-v6 input[type="text"],
+    .form-layout-v6 select { font-size: 0.9rem; }
+    .btn-submit-v6 { font-size: 0.85rem; padding: 9px 15px; }
+    .task-name-v6 { font-size: 0.9rem; }
+    /* Navegação inferior foi removida, então não precisamos de estilos para ela */
+}
